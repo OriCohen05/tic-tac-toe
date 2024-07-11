@@ -1,10 +1,9 @@
-const Shape = require('./Shape');
+import Shape from "./Shape.js";
 
-class Cell{
-    constructor(){
+export default class Cell{
+    constructor(x, y){
+        this.position = [x,y]
         this.emptyCell = true;
         this.shape = Shape.None;
     }
 }
-
-module.exports = Cell;

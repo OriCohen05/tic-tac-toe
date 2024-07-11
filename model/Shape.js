@@ -1,7 +1,5 @@
-const Shape = Object.freeze({
+export default Object.freeze({
     None : "None",
     X : "X",
     O : "O"   
 })
-
-module.exports = Shape;

@@ -1,6 +1,6 @@
-const Cell = require('../model/Cell.js');
+import Cell from '../model/Cell.js';
 
-const Constants = {
+export default {
     BOARD_GRID_COLUMNS : 3,
     BOARD_GRID_ROWS : 3,
     EMPTY_CELL: new Cell(),
@@ -10,5 +10,4 @@ const Constants = {
       WIN: 'WIN'
     }
   };
-  
-module.exports = Constants;
+
