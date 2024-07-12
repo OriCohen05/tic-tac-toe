@@ -1,13 +1,17 @@
-//import { BOARD_GRID_COLUMNS, BOARD_GRID_ROWS } from "../config/Constants.js";
 import Cell from "./Cell.js";
 
 export default class Board {
-  constructor() {
+  constructor(players) {
+    if (!players || players.length !== 2) throw new Error("Invalid number of players");
+    
     this.board = [];
+    this.players = players;
+    this.currentPlayerIndex = 0;
+
     for (let i = 0; i < 3; i++) {
       this.board[i] = [];
       for (let j = 0; j < 3; j++) {
-        this.board[i][j] = new Cell(i,j);
+        this.board[i][j] = new Cell(i, j);
       }
     }
   }
@@ -23,14 +27,18 @@ export default class Board {
     return true;
   }
 
-  #CanPlay(row, column) {
+  #canPlay(row, column) {
     return this.board[row][column].emptyCell;
   }
 
-  TryPlay(row, column, shape) {
-    if (!this.#CanPlay(row, column)) return false;
+  tryPlay(row, column) {
+    if (!this.#canPlay(row, column)) return false;
+
+    const currentPlayer = this.players[this.currentPlayerIndex];
     this.board[row][column].emptyCell = false;
-    this.board[row][column].shape = shape;
+    this.board[row][column].shape = currentPlayer.shape;
+    this.currentPlayerIndex = 1 - this.currentPlayerIndex;
+
     return true;
   }
 }

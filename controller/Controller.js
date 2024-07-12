@@ -1,7 +1,9 @@
 import Board from "../model/Board.js";
 import Shape from "../model/Shape.js";
+import Player from "../model/Player.js";
 
-const board = new Board();
+const players = [new Player("Natanel", Shape.O), new Player("Commander Matanel", Shape.X)]  
+const board = new Board(players);
 const cells = [];
 
 const BOARD_GRID_COLUMNS = 3,
@@ -26,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function handleClick(clickedCell) {
     const { row, column } = clickedCell.dataset;
-    
-    if (board.TryPlay(row, column, Shape.X)) {
+
+    if (board.tryPlay(row, column, Shape.X)) {
         renderBoard();
-        
+        console.log(board);
         if (checkWin()) {
             displayMessage(`${Shape.X} wins!`);
             disableClicks();
